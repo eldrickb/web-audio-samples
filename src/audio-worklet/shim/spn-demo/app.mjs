@@ -38,7 +38,6 @@ async function init() {
 
   const monitorNode = context.createGain();
   const inputGain = context.createGain();
-  const medianEnd = context.createGain();
 
   // Setup mic and processor
   const micStream = await setupMic();
@@ -55,17 +54,16 @@ async function init() {
   ls(streamSampleRate);
 
   // Setup components
+  setupInputGain(inputGain);
   setupMonitor(monitorNode);
   setupRecording(recordBuffer);
   setupVisualizers(liveAnalyserNode);
-
 
   const micSourceNode = context.createMediaStreamSource(micStream);
 
   // Setup node chain
   micSourceNode
       .connect(inputGain)
-      .connect(medianEnd)
       .connect(liveAnalyserNode)
       .connect(spNode)
       .connect(monitorNode)
@@ -143,6 +141,15 @@ function setupMonitor(monitorNode) {
     isMonitoring = !isMonitoring;
     updateMonitorGain(isMonitoring);
     monitorText.innerHTML = isMonitoring ? 'off' : 'on';
+  });
+}
+
+function setupInputGain(gainNode) {
+  const gainInput = document.querySelector('#input-gain');
+
+  gainInput.addEventListener('input', (e) => {
+    const value = parseFloat(e.target.value/100);
+    gainInput.gain.setTargetAtTime(value, context.currentTime, .01);
   });
 }
 

@@ -34,12 +34,18 @@ to_root_dir: ../../../
 		<div class="Live">
 			<h2>Live</h2>
 			<div>
+				<div class="my-2">
+					<label for="input-gain">Input gain</label>
+					<input type="range" min="0" max="200" value="100" id="input-gain">
+				</div>
+
 				<button id="monitor">
 			Turn monitor <span>on</span>
 				</button>
+
 				<button id="viz-toggle">
 					<span>Pause</span> visualizer
-		</button>
+				</button>
 			</div>
 
 			<canvas id="live-canvas"></canvas>
