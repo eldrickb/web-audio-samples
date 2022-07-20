@@ -497,6 +497,11 @@ button[disabled] {
   margin-bottom: 1.5rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .mb-12 {
   margin-bottom: 3rem;
 }
@@ -624,6 +629,10 @@ button[disabled] {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .text-gray-500 {
